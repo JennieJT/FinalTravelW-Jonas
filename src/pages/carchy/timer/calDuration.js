@@ -12,7 +12,7 @@ const minuteDuration = 60
 const calDuration = (startTime, endTime) => {
     !endTime && (endTime = new Date());
     const total = endTime.getTime() - startTime.getTime();
-    return Math.round(total/1000)
+    return Math.floor(total/1000)
 
 }
 /**
@@ -47,7 +47,7 @@ const durationString = (startTime, endTime) => {
 const durationStringByDuration = (diff) => {
     const hours = Math.floor(diff / 3600);
     const minutes = Math.floor((diff % 3600) / 60);
-    const seconds = Math.floor((diff % 60) );
+    const seconds = Math.floor(((diff % 3600) % 60) );
     return `${hours}:${minutes}:${seconds}`;
 }
 export { durationString, calDuration, projectDuration ,durationStringByDuration}

@@ -34,19 +34,20 @@ const TimerView = () => {
     const [curDuty, setCurDuty] = useState()
     const [thisDuration, setThisDuration] = useState(0)
     /**@type {JtDuty} */
-    let tmpDuty
+    let tmpDuty , tmpDutyStartTotal;
     const [totalDuration, setTotalDuration] = useState()
     const [totalProjectDuration, setTotalProjectDuration] = useState()
     const calDutyTime = () => {
         setCurTime(new Date())
         if (tmpDuty && tmpDuty.startTime) {
-            tmpDuty.totalDuration += calDuration(tmpDuty.startTime)
+            
             const duration = durationString(tmpDuty.startTime)
             setThisDuration(duration)
+            tmpDuty.totalDuration = tmpDutyStartTotal + calDuration(tmpDuty.startTime)
             setTotalDuration(durationStringByDuration( tmpDuty.totalDuration))
             arrProject = arrProject.map((project) => {
                 if (project.children) {
-                    project.children = project.children.map((du) => du.dutyId == tmpDuty.dutyId ? tmpDuty : { ...du })
+                    project.children = project.children.map((du) => du.dutyId === tmpDuty.dutyId ? tmpDuty : { ...du })
                 }
                 return project
 
@@ -69,6 +70,7 @@ const TimerView = () => {
         })
         if (duty.state === "START") {
             tmpDuty = duty
+            tmpDutyStartTotal = tmpDuty.totalDuration
 
             setCurDuty(tmpDuty)
 
