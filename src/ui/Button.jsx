@@ -2,10 +2,10 @@ import styled, { css } from "styled-components";
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     padding: 0rem 0.5rem;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 200;
     text-align: center;
   `,
   medium: css`
@@ -30,8 +30,9 @@ const variations = {
     }
   `,
   secondary: css`
-    color: var(--color-grey-600);
+    color: white;
     background: var(--color-grey-0);
+    background-color: blue;
     border: 1px solid var(--color-grey-200);
 
     &:hover {
@@ -51,14 +52,14 @@ const variations = {
 const Button = styled.button`
   border-radius: var(--border-radius-lg);
   background-color: var(--color-indigo-100);
-  border: none;
+  border: 1px;
 
-  ${(props) => sizes[props.sizes]}
-  ${(props) => variations[props.variations]}
+  ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variation]}
 `
 Button.defaultProps = {
   variation: "primary",
-  sizes: "small",
+  size: "small",
 }
 
 export default Button;
