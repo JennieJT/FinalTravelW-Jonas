@@ -1,3 +1,4 @@
+import './styles/index.css'
 import styled from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
 import Button from "./ui/Button";

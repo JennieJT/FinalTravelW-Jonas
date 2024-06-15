@@ -23,7 +23,49 @@ let arrProject = [
             }
         ]
 
+    },
+    {
+        projectId: "thirdprject",
+        name: "third prject",
+        children: [
+            {
+                dutyId: 'thirdduty',
+                name: 'first duty',
+                totalDuration: 112,
+                state: "STOP",
+                pId: 'thirdtprject'
+            },
+            {
+                dutyId: 'secounddutyd',
+                name: 'secound duty',
+                totalDuration: 220,
+                state: "STOP",
+                pId: 'thirdprject'
+            }
+        ]
+    },
+    {
+        projectId: "scondprject",
+        name: "second prject",
+        children: [
+            {
+                dutyId: 'scondduty',
+                name: 'first duty',
+                totalDuration: 112,
+                state: "STOP",
+                pId: 'thirdtprject'
+            },
+            {
+                dutyId: 'secounddutyd',
+                name: 'secound duty',
+                totalDuration: 220,
+                state: "STOP",
+                pId: 'thirdprject'
+            }
+        ]
+
     }
+
 ]
 
 const TimerView = () => {
@@ -34,17 +76,17 @@ const TimerView = () => {
     const [curDuty, setCurDuty] = useState()
     const [thisDuration, setThisDuration] = useState(0)
     /**@type {JtDuty} */
-    let tmpDuty , tmpDutyStartTotal;
+    let tmpDuty, tmpDutyStartTotal;
     const [totalDuration, setTotalDuration] = useState()
     const [totalProjectDuration, setTotalProjectDuration] = useState()
     const calDutyTime = () => {
         setCurTime(new Date())
         if (tmpDuty && tmpDuty.startTime) {
-            
+
             const duration = durationString(tmpDuty.startTime)
-            setThisDuration(duration)
+
             tmpDuty.totalDuration = tmpDutyStartTotal + calDuration(tmpDuty.startTime)
-            setTotalDuration(durationStringByDuration( tmpDuty.totalDuration))
+
             arrProject = arrProject.map((project) => {
                 if (project.children) {
                     project.children = project.children.map((du) => du.dutyId === tmpDuty.dutyId ? tmpDuty : { ...du })
@@ -53,6 +95,8 @@ const TimerView = () => {
 
             })
             setTotalProjectDuration(projectDuration(arrProject))
+            setTotalDuration(durationStringByDuration(tmpDuty.totalDuration))
+            setThisDuration(duration)
 
         }
 
@@ -85,8 +129,9 @@ const TimerView = () => {
 
     const listProject = useMemo(() => <ProjectView project={arrProject} onChangeDutyState={changeDutyState} />, [arrProject])
     return (
-        <div >
-            <div>
+        <div className="tw-flex lg:tw-w-1/2 tw-h-full 
+         tw-m-auto tw-flex-col tw-items-center dark:tw-bg-black"  >
+            <div className=" tw-w-full tw-py-12 tw-px-40 tw-h-72">
                 <p>
                     {curTime.toLocaleDateString() + "-" + curTime.toLocaleTimeString()}
                 </p>
@@ -103,7 +148,7 @@ const TimerView = () => {
                     </>
                 }
             </div>
-            <div>
+            <div className=" tw-w-full tw-px-20">
                 {/* <ProjectView project={arrProject}/> */}
                 {listProject}
             </div>

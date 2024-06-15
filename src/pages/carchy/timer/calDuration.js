@@ -45,9 +45,10 @@ const durationString = (startTime, endTime) => {
     return durationStringByDuration(diff)
 }
 const durationStringByDuration = (diff) => {
-    const hours = Math.floor(diff / 3600);
-    const minutes = Math.floor((diff % 3600) / 60);
-    const seconds = Math.floor(((diff % 3600) % 60) );
+    let hours = Math.floor(diff / 3600);
+    hours = hours.toString().padStart(2, '0')
+    let  minutes = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
+    const seconds = Math.floor(((diff % 3600) % 60) ).toString().padStart(2, '0');
     return `${hours}:${minutes}:${seconds}`;
 }
 export { durationString, calDuration, projectDuration ,durationStringByDuration}
