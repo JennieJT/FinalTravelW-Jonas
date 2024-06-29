@@ -131,7 +131,7 @@ const TimerView = () => {
     return (
         <div className="tw-flex lg:tw-w-1/2 tw-h-full 
          tw-m-auto tw-flex-col tw-items-center dark:tw-bg-black"  >
-            <div className=" tw-w-full tw-py-12 tw-px-40 tw-h-72">
+            <div className=" tw-w-full lg:tw-py-12 lg:tw-px-40  sm:tw-px-20  tw-h-72">
                 <p>
                     {curTime.toLocaleDateString() + "-" + curTime.toLocaleTimeString()}
                 </p>
